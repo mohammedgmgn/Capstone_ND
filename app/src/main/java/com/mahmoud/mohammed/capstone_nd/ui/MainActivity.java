@@ -19,32 +19,11 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
-    RequestQueue requestQueue;
-    String url="https://www.googleapis.com/books/v1/volumes?q=search+terms";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        requestQueue = Volley.newRequestQueue(this);
-        sendJsonRequest(url);
-
-    }
-    public  void sendJsonRequest(String url) {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, (String) null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject jsonObject) {
-                Toast.makeText(MainActivity.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        });
-        requestQueue.add(request);
-
 
     }
 
