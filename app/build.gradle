@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        buildTypes.each {
+            it.buildConfigField 'String', 'THE_BOOK_API_KEY', "\"AIzaSyDodQIitDnWcldanQOYYFx-WZvGm1mbgYM\""
+        }
+    }
+
 }
 
 dependencies {
@@ -28,9 +34,12 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:cardview-v7:21.0.+'
-    compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.jakewharton:butterknife:8.4.0'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
+
+
 
     testCompile 'junit:junit:4.12'
 }
