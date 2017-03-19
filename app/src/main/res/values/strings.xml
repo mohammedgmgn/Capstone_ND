@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capstone_ND</string>
+    <string name="app_name">ReadShow</string>
     <string name="url">https://www.googleapis.com/books/v1/volumes?q=time</string>
     <string name="print_type_all">printType=all</string>
     <string name="print_type_magazines">printType=magazines</string>
