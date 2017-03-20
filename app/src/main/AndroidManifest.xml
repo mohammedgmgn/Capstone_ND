@@ -23,6 +23,9 @@
         <activity android:name=".ui.DetailActivity"></activity>
         <service android:name=".data.UpdaterService"
             android:exported="false" />
+        <provider android:name=".data.BookProvider"
+            android:authorities="com.mahmoud.mohammed.capstone_nd"
+            android:exported="false" />
 
     </application>
 

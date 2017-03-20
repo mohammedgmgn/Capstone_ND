@@ -16,7 +16,7 @@ import com.mahmoud.mohammed.capstone_nd.model.Book;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.IndanMovieHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
 
     List<Book> moviesList ;
     Context ctx;
@@ -29,17 +29,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.IndanMovieHolder> 
     }
 
     @Override
-    public IndanMovieHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Myholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_row,parent,false);
-        IndanMovieHolder holder = new IndanMovieHolder(row);
+        Myholder holder = new Myholder(row);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(IndanMovieHolder holder, int position) {
+    public void onBindViewHolder(Myholder holder, int position) {
 
         Book book = moviesList.get(position);
-holder.booktitle.setText(book.getTitle());
+        holder.booktitle.setText(book.getTitle());
         holder.bookdesc.setText(book.getDescription());
 
         Glide.with(ctx).load(book.getImageUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -55,11 +55,11 @@ holder.booktitle.setText(book.getTitle());
         return moviesList.size();
     }
 
-    class IndanMovieHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class Myholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView booktitle,bookrate,bookdesc ;
         ImageView poster;
 
-        public IndanMovieHolder(View itemView) {
+        public Myholder(View itemView) {
             super(itemView);
             booktitle = (TextView) itemView.findViewById(R.id.booktitleTV);
             bookdesc = (TextView) itemView.findViewById(R.id.bookdescTV);
