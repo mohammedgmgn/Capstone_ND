@@ -53,16 +53,18 @@ public class MainActivity extends AppCompatActivity implements
         requestQueue = Volley.newRequestQueue(this);
         recyclerView=new RecyclerView(this);
 
+
          recyclerView = (RecyclerView) findViewById(R.id.my_recycler_viewt);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
             sendJsonRequest(getResources().getString(R.string.url)+"&"+(getResources().getString(R.string.print_type_magazines))+"&"+ config.API_KEY);
     }
+
     public void sendJsonRequest(String url) {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, (String) null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-            //    Toast.makeText(MainActivity.this,response+"",Toast.LENGTH_SHORT).show();
+                @Override
+                public void onResponse(JSONObject response) {
+                    //    Toast.makeText(MainActivity.this,response+"",Toast.LENGTH_SHORT).show();
 
                 Books=new ArrayList<>();
 
