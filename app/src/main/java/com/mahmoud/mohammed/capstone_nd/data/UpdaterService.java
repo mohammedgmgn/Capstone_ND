@@ -43,16 +43,16 @@ public class UpdaterService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-if(!cm.getActiveNetworkInfo().isConnected()||cm.getActiveNetworkInfo()==null){
-    Toast.makeText(getApplicationContext(),"No Internet Connection",Toast.LENGTH_SHORT).show();
-    return;
-}
+        if (!cm.getActiveNetworkInfo().isConnected() || cm.getActiveNetworkInfo() == null) {
+            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+            return;
+        }
         sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, true));
-        final ArrayList<ContentProviderOperation>cpo=new ArrayList<>();
+        final ArrayList<ContentProviderOperation> cpo = new ArrayList<>();
         //refresh content provider getting data from server
         final Uri dirUri = BookContract.BookItems.buildDirUri();
         cpo.add(ContentProviderOperation.newDelete(dirUri).build());
-        String url= config.BASE_URL;
+        String url = config.BASE_URL;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, (String) null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -62,14 +62,13 @@ if(!cm.getActiveNetworkInfo().isConnected()||cm.getActiveNetworkInfo()==null){
                     JSONArray mResultArray = response.getJSONArray("items");
                     for (int i = 0; i < mResultArray.length(); i++) {
                         ContentValues values = new ContentValues();
-
                         JSONObject mResultObject = mResultArray.getJSONObject(i);
-                        values.put(BookContract.BookItems.SERVER_ID, mResultObject.getString("id" ));
-                        JSONObject volumeInfo=mResultObject.getJSONObject("volumeInfo");
+                        values.put(BookContract.BookItems.SERVER_ID, mResultObject.getString("id"));
+                        JSONObject volumeInfo = mResultObject.getJSONObject("volumeInfo");
                         values.put(BookContract.BookItems.TITLE, volumeInfo.getString("title"));
                         values.put(BookContract.BookItems.DESCRIPTION, volumeInfo.getString("description"));
-                        JSONObject imageinfo=volumeInfo.getJSONObject("imageLinks");
-                        values.put(BookContract.BookItems.PHOTO_URL, volumeInfo.getString("smallThumbnail"));
+                        JSONObject imageinfo = volumeInfo.getJSONObject("imageLinks");
+                        values.put(BookContract.BookItems.PHOTO_URL, imageinfo.getString("smallThumbnail"));
                         cpo.add(ContentProviderOperation.newInsert(dirUri).withValues(values).build());
                          /*
                         book.setPublishedDate(volumeInfo.getString("publishedDate"));

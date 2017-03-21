@@ -26,6 +26,7 @@ public class BookProvider extends ContentProvider {
     private static final int BOOKS__ID = 1;
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
+
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = BookContract.CONTENT_AUTHORITY;
@@ -54,7 +55,9 @@ public class BookProvider extends ContentProvider {
         if (cursor != null) {
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
         }
-        return cursor;}
+        return cursor;
+    }
+
     private SelectionBuilder buildSelection(Uri uri) {
         final SelectionBuilder builder = new SelectionBuilder();
         final int match = sUriMatcher.match(uri);
@@ -113,8 +116,7 @@ public class BookProvider extends ContentProvider {
     * */
     @Nullable
     @Override
-    public String getType(Uri uri)
-    {
+    public String getType(Uri uri) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case BOOKS:
@@ -142,11 +144,11 @@ public class BookProvider extends ContentProvider {
             default: {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
             }
-        }    }
+        }
+    }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs)
-    {
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         final SelectionBuilder builder = buildSelection(uri);
         getContext().getContentResolver().notifyChange(uri, null);

@@ -24,6 +24,8 @@ public class BookContract {
 public static class BookItems implements BookColumns{
     public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.com.mahmoud.mohammed.capstone_nd.items";
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.com.mahmoud.mohammed.capstone_nd.items";
+    public static final String DEFAULT_SORT = _ID + " DESC";
+
     /** Matches: /items/ */
     public static Uri buildDirUri() {
         return BASE_URI.buildUpon().appendPath("items").build();

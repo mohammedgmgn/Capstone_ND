@@ -18,6 +18,7 @@ public class SelectionBuilder {
     private HashMap<String, String> mProjectionMap;
     private StringBuilder mSelection;
     private ArrayList<String> mSelectionArgs;
+
     public SelectionBuilder where(String selection, String... selectionArgs) {
         if (TextUtils.isEmpty(selection)) {
             if (selectionArgs != null && selectionArgs.length > 0) {
@@ -42,6 +43,7 @@ public class SelectionBuilder {
 
         return this;
     }
+
     public SelectionBuilder table(String table) {
         mTable = table;
         return this;
@@ -70,6 +72,7 @@ public class SelectionBuilder {
             mSelectionArgs = new ArrayList<String>();
         }
     }
+
     public String getSelection() {
         if (mSelection != null) {
             return mSelection.toString();
@@ -77,6 +80,7 @@ public class SelectionBuilder {
             return null;
         }
     }
+
     public String[] getSelectionArgs() {
         if (mSelectionArgs != null) {
             return mSelectionArgs.toArray(new String[mSelectionArgs.size()]);
@@ -101,6 +105,7 @@ public class SelectionBuilder {
         return "SelectionBuilder[table=" + mTable + ", selection=" + getSelection()
                 + ", selectionArgs=" + Arrays.toString(getSelectionArgs()) + "]";
     }
+
     public Cursor query(SQLiteDatabase db, String[] columns, String orderBy) {
         return query(db, columns, null, null, orderBy, null);
     }

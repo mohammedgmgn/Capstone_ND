@@ -19,13 +19,13 @@ public class BooksDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-db.execSQL("CREATE TABLE"+ITEMS +" ("
-        + BookContract.BookColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-        + BookContract.BookColumns.SERVER_ID + " TEXT,"
-        + BookContract.BookColumns.TITLE + " TEXT NOT NULL,"
-        + BookContract.BookColumns.DESCRIPTION + " TEXT NOT NULL,"
-        + BookContract.BookColumns.PHOTO_URL + " TEXT NOT NULL,"
-        + ")" );
+        db.execSQL("CREATE TABLE " + ITEMS + " ("
+                + BookContract.BookColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + BookContract.BookColumns.SERVER_ID + " TEXT,"
+                + BookContract.BookColumns.TITLE + " TEXT NOT NULL,"
+                + BookContract.BookColumns.DESCRIPTION + " TEXT NOT NULL,"
+                + BookContract.BookColumns.PHOTO_URL + " TEXT NOT NULL"
+                + ")" );
     }
 
     @Override
