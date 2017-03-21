@@ -70,11 +70,19 @@ public class UpdaterService extends IntentService {
                         JSONObject imageinfo = volumeInfo.getJSONObject("imageLinks");
                         values.put(BookContract.BookItems.PHOTO_URL, imageinfo.getString("smallThumbnail"));
                         cpo.add(ContentProviderOperation.newInsert(dirUri).withValues(values).build());
-                         /*
+                        /*
                         book.setPublishedDate(volumeInfo.getString("publishedDate"));
                         String img=imageinfo.getString("smallThumbnail");
                         book.setImageUrl(img); */
                     }
+                    try {
+                        getContentResolver().applyBatch(BookContract.CONTENT_AUTHORITY, cpo);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    } catch (OperationApplicationException e) {
+                        e.printStackTrace();
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
