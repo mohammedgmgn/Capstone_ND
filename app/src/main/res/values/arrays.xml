@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="places_picture">
+        <item>@drawable/a</item>
+        <item>@drawable/abusimbel</item>
+        <item>@drawable/abydostempleofosiris</item>
+        <item>@drawable/alexandria</item>
+        <item>@drawable/aswannile</item>
+        <item>@drawable/egyptianmuseum</item>
+    </array>
+
+</resources>
