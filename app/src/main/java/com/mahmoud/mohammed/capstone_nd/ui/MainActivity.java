@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.adapter.MyAdapter;
 import com.mahmoud.mohammed.capstone_nd.data.BookLoader;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         requestQueue = Volley.newRequestQueue(this);
+        String tkn = FirebaseInstanceId.getInstance().getToken();
+
         recyclerView = new RecyclerView(this);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_viewt);
         mSwipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);

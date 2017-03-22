@@ -18,6 +18,7 @@ import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.data.BookContract;
 import com.mahmoud.mohammed.capstone_nd.data.BookLoader;
 import com.mahmoud.mohammed.capstone_nd.model.Book;
+import com.mahmoud.mohammed.capstone_nd.ui.DetailActivity;
 
 import java.util.List;
 
@@ -42,13 +43,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     public Myholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_row,parent,false);
         final Myholder holder = new Myholder(row);
-        row.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ctx.startActivity(new Intent(Intent.ACTION_VIEW, BookContract.BookItems.buildItemUri(getItemId(holder.getAdapterPosition()))));
-
-            }
-        });
         return holder;
     }
 
@@ -65,6 +59,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.poster);
+
 
     }
 
@@ -83,7 +78,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
             booktitle = (TextView) itemView.findViewById(R.id.booktitleTV);
             bookdesc = (TextView) itemView.findViewById(R.id.bookdescTV);
             poster = (ImageView) itemView.findViewById(R.id.bookposteIMG);
-            itemView.setOnClickListener(this);
+          //  itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ctx.startActivity(new Intent(new Intent(ctx, DetailActivity.class)));
+                }
+            });
 
         }
         @Override

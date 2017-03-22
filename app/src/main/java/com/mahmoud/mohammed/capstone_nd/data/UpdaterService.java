@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.view.View;
@@ -35,6 +36,11 @@ import java.util.ArrayList;
 public class UpdaterService extends IntentService {
     public static final String BROADCAST_ACTION_STATE_CHANGE = "com.mahmoud.mohammed.capstone_nd.intent.action.STATE_CHANGE";
     public static final String EXTRA_REFRESHING = "com.mahmoud.mohammed.capstone_nd.intent.extra.REFRESHING";
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
 
     public UpdaterService() {
         super("UpdaterService");
@@ -42,9 +48,11 @@ public class UpdaterService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        if (!cm.getActiveNetworkInfo().isConnected() || cm.getActiveNetworkInfo() == null) {
-            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+       // ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        //NetworkInfo info = cm.getActiveNetworkInfo();
+
+        if (!isNetworkConnected()) {
+           // Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             return;
         }
         sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, true));
