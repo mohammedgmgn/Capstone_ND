@@ -3,6 +3,7 @@
     <string name="url">https://www.googleapis.com/books/v1/volumes?q=time</string>
     <string name="print_type_all">printType=all</string>
     <string name="print_type_magazines">printType=magazines</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
 
 </resources>

@@ -22,6 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.adapter.MyAdapter;
@@ -64,6 +67,11 @@ public class MainActivity extends AppCompatActivity implements
         mSwipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         // toolbar.setTitle("HI");
        /* mOpenHelper = new BooksDatabase(this);
         mOpenHelper.getWritableDatabase();
