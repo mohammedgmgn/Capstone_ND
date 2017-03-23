@@ -28,7 +28,7 @@
                 android:id="@+id/booktitleTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
                 android:text="Bajrang Bhaijaan"
                 android:textColor="#2d2d2d"
@@ -39,7 +39,7 @@
                 android:id="@+id/bookdescTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:textColor="#a1a1a1"
                 android:textSize="16dp" />

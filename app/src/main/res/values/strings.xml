@@ -5,5 +5,7 @@
     <string name="print_type_magazines">printType=magazines</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
+    <string name="all">All</string>
+    <string name="magazines">Magazines</string>
 
 </resources>
