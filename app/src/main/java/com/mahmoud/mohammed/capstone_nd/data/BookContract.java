@@ -9,6 +9,7 @@ import android.net.Uri;
 public class BookContract {
     public static final String CONTENT_AUTHORITY = "com.mahmoud.mohammed.capstone_nd";
     public static final Uri BASE_URI = Uri.parse("content://com.mahmoud.mohammed.capstone_nd");
+  //  public static final Uri WIDGET_URI=
     interface BookColumns{
         /** Type: INTEGER PRIMARY KEY AUTOINCREMENT */
         String _ID = "_id";

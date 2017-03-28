@@ -10,6 +10,7 @@
     <dimen name="textsize">18sp</dimen>
     <dimen name="largesize">64dp</dimen>
     <dimen name="md_keylines">16dp</dimen>
+    <dimen name="widget_header_padding">8dp</dimen>
 
     <!--
 Refer to App Widget Documentation for margin information

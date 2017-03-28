@@ -26,12 +26,12 @@
 
         <service
             android:name=".data.UpdaterService"
-            android:exported="false" />
+            android:exported="true" />
 
         <provider
             android:name=".data.BookProvider"
             android:authorities="com.mahmoud.mohammed.capstone_nd"
-            android:exported="false" />
+            android:exported="true" />
 
         <service android:name=".firebasenotification.MyFirebaseMessagingService">
             <intent-filter>
@@ -43,16 +43,27 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+        <service
+            android:name=".widget.WidgetService"
+            android:enabled="true"
+            android:exported="true" />
 
-        <receiver android:name=".CollectionWidget">
+
+        <receiver android:name=".widget.CollectionWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.ACTION_WIDGET_UPDATED"/>
+
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/collection_widget_info" />
         </receiver>
+        <service android:name=".widget.WidgetListService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+
     </application>
 
 </manifest>

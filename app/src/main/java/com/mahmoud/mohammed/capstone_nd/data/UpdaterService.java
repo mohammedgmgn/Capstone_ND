@@ -36,6 +36,8 @@ import java.util.ArrayList;
 public class UpdaterService extends IntentService {
     public static final String BROADCAST_ACTION_STATE_CHANGE = "com.mahmoud.mohammed.capstone_nd.intent.action.STATE_CHANGE";
     public static final String EXTRA_REFRESHING = "com.mahmoud.mohammed.capstone_nd.intent.extra.REFRESHING";
+    public static final String ACTION_WIDGET_UPDATED = "android.appwidget.action.ACTION_WIDGET_UPDATED";
+
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
