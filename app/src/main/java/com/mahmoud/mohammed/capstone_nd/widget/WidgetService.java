@@ -70,9 +70,9 @@ public class WidgetService extends IntentService{
 
 
         for (int appWidgetId : appWidgetIds) {
-            RemoteViews views = new RemoteViews(getPackageName(), android.R.layout.simple_list_item_1);
+            RemoteViews views = new RemoteViews(getPackageName(), R.layout.collection_widget);
             String titletext = data.getString(POSITION_TITLE);
-            views.setTextViewText(android.R.id.text1, title);
+            views.setTextViewText(R.id.app_widget_text, titletext);
 
             Intent launchIntent=new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this,0,launchIntent,0);

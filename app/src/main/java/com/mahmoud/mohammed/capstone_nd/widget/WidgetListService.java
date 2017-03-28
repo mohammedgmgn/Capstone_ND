@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.data.BookContract;
 
 /**
@@ -72,11 +73,11 @@ public class WidgetListService extends RemoteViewsService {
                 }
                 data.moveToPosition(position);
 
-                RemoteViews remoteViews = new RemoteViews(getPackageName(), android.R.layout.simple_list_item_1);
+                RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.widget_list_item);
                 String title = data.getString(POSITION_TITLE);
                 String desc = data.getString(POSITION_DESCRIPTION);
-                remoteViews.setTextViewText(android.R.id.text1, title);
-                remoteViews.setTextColor(android.R.id.text1, Color.CYAN);
+                remoteViews.setTextViewText(R.id.item_text, title);
+                remoteViews.setTextColor(R.id.item_text, Color.CYAN);
 
                 return remoteViews;
             }
