@@ -33,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
 
     public MyAdapter(Cursor cursor, Context ctx) {
         mCursor = cursor;
-        this.ctx=ctx;
+        this.ctx = ctx;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
 
     @Override
     public Myholder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_row,parent,false);
+        View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_row, parent, false);
         final Myholder holder = new Myholder(row);
         return holder;
     }
@@ -54,8 +54,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     public void onBindViewHolder(Myholder holder, int position) {
 
         mCursor.moveToPosition(position);
-        String title=mCursor.getString(BookLoader.Query.TITLE);
-        String desc=mCursor.getString(BookLoader.Query.DESCRIPTION);
+        String title = mCursor.getString(BookLoader.Query.TITLE);
+        String desc = mCursor.getString(BookLoader.Query.DESCRIPTION);
         holder.booktitle.setText(title);
         holder.bookdesc.setText(desc);
         Glide.with(ctx).load(mCursor.getString(BookLoader.Query.PHOTO_URL)).diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -63,8 +63,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.poster);
-
-
     }
 
     @Override
@@ -74,18 +72,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     }
 
     class Myholder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView booktitle,bookrate,bookdesc ;
+        TextView booktitle, bookrate, bookdesc;
         ImageView poster;
         LinearLayout linearLayout;
 
         public Myholder(View itemView) {
             super(itemView);
-            linearLayout=(LinearLayout)itemView.findViewById(R.id.book_row_layout);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.book_row_layout);
             booktitle = (TextView) itemView.findViewById(R.id.booktitleTV);
             bookdesc = (TextView) itemView.findViewById(R.id.bookdescTV);
             poster = (ImageView) itemView.findViewById(R.id.bookposteIMG);
             linearLayout.setContentDescription(booktitle.getText().toString());
-          //  itemView.setOnClickListener(this);
+            //  itemView.setOnClickListener(this);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -94,19 +92,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
             });
 
         }
+
         @Override
         public void onClick(View view) {
-            itemListener.recyclerViewListClicked(view,this.getLayoutPosition());
+            itemListener.recyclerViewListClicked(view, this.getLayoutPosition());
 
         }
 
     }
-    public interface RecyclerViewClickListener
-    {
+
+    public interface RecyclerViewClickListener {
 
         void recyclerViewListClicked(View v, int position);
     }
-
 
 
 }
