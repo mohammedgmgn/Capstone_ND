@@ -38,5 +38,14 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.AdView>
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:visibility="gone"
+        android:text="Error message"
+        android:textColor="#000000"/>
 
 </android.support.design.widget.CoordinatorLayout>

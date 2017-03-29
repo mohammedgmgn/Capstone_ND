@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,6 +30,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.adapter.MyAdapter;
+import com.mahmoud.mohammed.capstone_nd.data.BookContract;
 import com.mahmoud.mohammed.capstone_nd.data.BookLoader;
 import com.mahmoud.mohammed.capstone_nd.data.BooksDatabase;
 import com.mahmoud.mohammed.capstone_nd.data.UpdaterService;
@@ -50,10 +53,18 @@ public class MainActivity extends AppCompatActivity implements
     //@BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     RequestQueue requestQueue;
-    private List<Book> Books = new ArrayList<>();
     MyAdapter adapter;
     private boolean mIsRefreshing = false;
-    BooksDatabase mOpenHelper;
+    TextView mNoData;
+    private final String[] BOOK_COLUMNS = {
+            BookContract.BookItems._ID,
+            BookContract.BookItems.SERVER_ID,
+            BookContract.BookItems.TITLE,
+            BookContract.BookItems.DESCRIPTION,
+            BookContract.BookItems.PHOTO_URL,
+
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,33 +72,42 @@ public class MainActivity extends AppCompatActivity implements
         ButterKnife.bind(this);
         requestQueue = Volley.newRequestQueue(this);
         String tkn = FirebaseInstanceId.getInstance().getToken();
-
+        mNoData = (TextView) findViewById(R.id.error);
         recyclerView = new RecyclerView(this);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_viewt);
-        mSwipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-        // toolbar.setTitle("HI");
-       /* mOpenHelper = new BooksDatabase(this);
-        mOpenHelper.getWritableDatabase();
-        Toast.makeText(this,mOpenHelper.getDatabaseName(),Toast.LENGTH_SHORT).show();*/
         getLoaderManager().initLoader(0, null, this);
-
-        if(savedInstanceState==null)
-        {
+        if (savedInstanceState == null) {
             refresh();
         }
+    }
 
-      //  sendJsonRequest(getResources().getString(R.string.url) + "&" + (getResources().getString(R.string.print_type_magazines)) + "&" + config.API_KEY);
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 
     private void refresh() {
         startService(new Intent(this, UpdaterService.class));
+        Cursor data = getContentResolver().query(BookContract.BookItems.buildDirUri(), BOOK_COLUMNS, null, null, null);
+
+        if (!isNetworkConnected() && data.getCount() == 0) {
+            mNoData.setText(getString(R.string.error_no_network));
+            mNoData.setVisibility(View.VISIBLE);
+        } else if (!isNetworkConnected()) {
+            Toast.makeText(this, R.string.toast_no_connectivity, Toast.LENGTH_LONG).show();
+
+        } else {
+            mNoData.setVisibility(View.GONE);
+
+        }
+
     }
 
     private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {
@@ -117,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onStop();
         unregisterReceiver(mRefreshingReceiver);
     }
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return BookLoader.newAllArticlesInstance(this);
@@ -124,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        MyAdapter adapter = new MyAdapter(data,this);
+        adapter = new MyAdapter(data, this);
         /*
          told my adapter that items will not change for given position
          and adapter no need to call onBindViewHolder for this position again

@@ -27,7 +27,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     Context ctx;
     RecyclerViewClickListener itemListener;
 
-    public MyAdapter(Cursor cursor,Context ctx) {
+    public MyAdapter() {
+    }
+
+    public MyAdapter(Cursor cursor, Context ctx) {
         mCursor = cursor;
         this.ctx=ctx;
     }
