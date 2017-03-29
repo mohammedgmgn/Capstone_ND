@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -75,12 +76,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     class Myholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView booktitle,bookrate,bookdesc ;
         ImageView poster;
+        LinearLayout linearLayout;
 
         public Myholder(View itemView) {
             super(itemView);
+            linearLayout=(LinearLayout)itemView.findViewById(R.id.book_row_layout);
             booktitle = (TextView) itemView.findViewById(R.id.booktitleTV);
             bookdesc = (TextView) itemView.findViewById(R.id.bookdescTV);
             poster = (ImageView) itemView.findViewById(R.id.bookposteIMG);
+            linearLayout.setContentDescription(booktitle.getText().toString());
           //  itemView.setOnClickListener(this);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
