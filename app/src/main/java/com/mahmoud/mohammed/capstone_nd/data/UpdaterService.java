@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.mahmoud.mohammed.capstone_nd.Helper;
 import com.mahmoud.mohammed.capstone_nd.adapter.MyAdapter;
 import com.mahmoud.mohammed.capstone_nd.model.Book;
 import com.mahmoud.mohammed.capstone_nd.remote.ApplicationController;
@@ -38,10 +39,6 @@ public class UpdaterService extends IntentService {
     public static final String EXTRA_REFRESHING = "com.mahmoud.mohammed.capstone_nd.intent.extra.REFRESHING";
     public static final String ACTION_WIDGET_UPDATED = "android.appwidget.action.ACTION_WIDGET_UPDATED";
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
-    }
 
     public UpdaterService() {
         super("UpdaterService");
@@ -52,7 +49,7 @@ public class UpdaterService extends IntentService {
        // ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         //NetworkInfo info = cm.getActiveNetworkInfo();
 
-        if (!isNetworkConnected()) {
+        if (!Helper.isNetworkConnected(getApplicationContext())) {
            // Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -79,10 +76,6 @@ public class UpdaterService extends IntentService {
                         JSONObject imageinfo = volumeInfo.getJSONObject("imageLinks");
                         values.put(BookContract.BookItems.PHOTO_URL, imageinfo.getString("smallThumbnail"));
                         cpo.add(ContentProviderOperation.newInsert(dirUri).withValues(values).build());
-                        /*
-                        book.setPublishedDate(volumeInfo.getString("publishedDate"));
-                        String img=imageinfo.getString("smallThumbnail");
-                        book.setImageUrl(img); */
                     }
                     try {
                         getContentResolver().applyBatch(BookContract.CONTENT_AUTHORITY, cpo);
@@ -102,10 +95,8 @@ public class UpdaterService extends IntentService {
 
             }
         });
-
         ApplicationController.getInstance().addToRequestQueue(request);
-
-        sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
+       // sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
 
 
     }

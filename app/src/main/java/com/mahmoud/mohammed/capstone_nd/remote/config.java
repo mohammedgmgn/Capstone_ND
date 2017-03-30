@@ -13,5 +13,4 @@ import java.net.URL;
 public class config {
     public static String API_KEY=BuildConfig.THE_BOOK_API_KEY;
     public static String BASE_URL="https://www.googleapis.com/books/v1/volumes?q=time&printType=magazines&"+ API_KEY;
-
 }

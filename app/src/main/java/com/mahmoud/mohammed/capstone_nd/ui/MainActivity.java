@@ -28,6 +28,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.mahmoud.mohammed.capstone_nd.Helper;
 import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.adapter.MyAdapter;
 import com.mahmoud.mohammed.capstone_nd.data.BookContract;
@@ -88,19 +89,15 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
-    }
 
     private void refresh() {
         startService(new Intent(this, UpdaterService.class));
         Cursor data = getContentResolver().query(BookContract.BookItems.buildDirUri(), BOOK_COLUMNS, null, null, null);
 
-        if (!isNetworkConnected() && data.getCount() == 0) {
+        if (!Helper.isNetworkConnected(this) && data.getCount() == 0) {
             mNoData.setText(getString(R.string.error_no_network));
             mNoData.setVisibility(View.VISIBLE);
-        } else if (!isNetworkConnected()) {
+        } else if (!Helper.isNetworkConnected(this)) {
             Toast.makeText(this, R.string.toast_no_connectivity, Toast.LENGTH_LONG).show();
 
         } else {
