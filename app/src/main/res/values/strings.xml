@@ -13,5 +13,8 @@
     <string name="toast_no_connectivity">Will refresh when network available.</string>
     <string name="describe_bookitem">one book</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

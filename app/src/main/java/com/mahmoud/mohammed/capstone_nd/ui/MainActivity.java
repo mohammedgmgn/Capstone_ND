@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements
     MyAdapter adapter;
     private boolean mIsRefreshing = false;
     TextView mNoData;
+    final static int UNIQUE_ID=0;
     private final String[] BOOK_COLUMNS = {
             BookContract.BookItems._ID,
             BookContract.BookItems.SERVER_ID,
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        getLoaderManager().initLoader(0, null, this);
+        getLoaderManager().initLoader(UNIQUE_ID, null, this);
         if (savedInstanceState == null) {
             refresh();
         }
@@ -142,7 +143,14 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        adapter = new MyAdapter(data, this);
+        adapter = new MyAdapter(data, this, new MyAdapter.RecyclerViewClickListener() {
+            @Override
+            public void recyclerViewListClicked(View v, int position) {
+                Intent intent=new Intent(MainActivity.this,DetailActivity.class);
+                intent.putExtra("postion",position);
+                startActivity(intent);
+            }
+        });
         /*
          told my adapter that items will not change for given position
          and adapter no need to call onBindViewHolder for this position again
