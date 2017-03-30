@@ -4,6 +4,7 @@ import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,8 +51,9 @@ public class DetailActivity extends AppCompatActivity implements
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursor=data;
-        Toast.makeText(this,mCursor.getCount()+"",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,mCursor.getString(BookLoader.Query.TITLE),Toast.LENGTH_LONG).show();
        // getString(BookLoader.Query.TITLE
+
 
     }
 
