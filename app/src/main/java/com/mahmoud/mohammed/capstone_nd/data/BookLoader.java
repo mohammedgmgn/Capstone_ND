@@ -16,7 +16,8 @@ public class BookLoader extends CursorLoader {
 
     //for specific item
     public static BookLoader newInstanceForItemId(Context context, long itemId) {
-        return new BookLoader(context, BookContract.BookItems.buildItemUri(itemId));
+        BookLoader loader=new BookLoader(context, BookContract.BookItems.buildItemUri(itemId));
+        return loader ;
     }
 
     private BookLoader(Context context, Uri uri) {

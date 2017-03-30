@@ -146,9 +146,11 @@ public class MainActivity extends AppCompatActivity implements
         adapter = new MyAdapter(data, this, new MyAdapter.RecyclerViewClickListener() {
             @Override
             public void recyclerViewListClicked(View v, int position) {
-                Intent intent=new Intent(MainActivity.this,DetailActivity.class);
-                intent.putExtra("postion",position);
-                startActivity(intent);
+                Intent i=new Intent(MainActivity.this,DetailActivity.class);
+                i.putExtra("postion",position);
+                String s=BookContract.BookItems.buildItemUri(position).toString();
+                i.putExtra("uri",s);
+                startActivity(i);
             }
         });
         /*
