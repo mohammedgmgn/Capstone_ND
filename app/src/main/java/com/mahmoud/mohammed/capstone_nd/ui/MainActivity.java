@@ -143,16 +143,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        adapter = new MyAdapter(data, this, new MyAdapter.RecyclerViewClickListener() {
-            @Override
-            public void recyclerViewListClicked(View v, int position) {
-                Intent i=new Intent(MainActivity.this,DetailActivity.class);
-                i.putExtra("postion",position);
-                String s=BookContract.BookItems.buildItemUri(position).toString();
-                i.putExtra("uri",s);
-                startActivity(i);
-            }
-        });
+        adapter = new MyAdapter(data, this);
         /*
          told my adapter that items will not change for given position
          and adapter no need to call onBindViewHolder for this position again

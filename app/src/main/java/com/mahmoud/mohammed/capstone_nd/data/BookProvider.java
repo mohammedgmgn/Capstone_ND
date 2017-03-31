@@ -24,6 +24,8 @@ public class BookProvider extends ContentProvider {
     private SQLiteOpenHelper mOpenHelper;
     private static final int BOOKS = 0;
     private static final int BOOKS__ID = 1;
+    private static final int BOOKS_SERVER_ID = 2;
+
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
@@ -32,6 +34,8 @@ public class BookProvider extends ContentProvider {
         final String authority = BookContract.CONTENT_AUTHORITY;
         matcher.addURI(authority, "items", BOOKS);
         matcher.addURI(authority, "items/#", BOOKS__ID);
+        matcher.addURI(authority, "items/SERVER_ID", BOOKS_SERVER_ID);
+
         return matcher;
     }
 

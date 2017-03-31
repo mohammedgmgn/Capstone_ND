@@ -31,10 +31,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     public MyAdapter() {
     }
 
-    public MyAdapter(Cursor cursor, Context ctx,RecyclerViewClickListener itemListener) {
+    public MyAdapter(Cursor cursor, Context ctx) {
         mCursor = cursor;
         this.ctx = ctx;
-        this.itemListener=itemListener;
     }
 
     @Override
@@ -48,6 +47,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     public Myholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_row, parent, false);
         final Myholder holder = new Myholder(row);
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ctx,DetailActivity.class);
+                i.putExtra("postion",holder.getAdapterPosition());
+                ctx.startActivity(i);
+               // ctx.startActivity(new Intent(Intent.ACTION_VIEW, BookContract.BookItems.buildItemUri(getItemId(holder.getAdapterPosition()))));
+            }
+        });
 
         return holder;
     }
@@ -65,7 +73,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.poster);
-
     }
 
     @Override
@@ -86,8 +93,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
             bookdesc = (TextView) itemView.findViewById(R.id.bookdescTV);
             poster = (ImageView) itemView.findViewById(R.id.bookposteIMG);
             linearLayout.setContentDescription(booktitle.getText().toString());
+            //  itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ctx.startActivity(new Intent(new Intent(ctx, DetailActivity.class)));
+                }
+            });
 
-              itemView.setOnClickListener(this);
         }
 
         @Override

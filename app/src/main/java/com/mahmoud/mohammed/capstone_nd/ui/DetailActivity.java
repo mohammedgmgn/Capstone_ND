@@ -6,6 +6,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +22,7 @@ import static com.mahmoud.mohammed.capstone_nd.ui.MainActivity.UNIQUE_ID;
 public class DetailActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
     final static int ID_DEFAULT_VALUE=0;
-    private long mFirstID;
+    private int mFirstID;
     private long mSelectedItemId;
     private Cursor mCursor;
     private static String TAG="tag";
@@ -40,19 +41,23 @@ public class DetailActivity extends AppCompatActivity implements
        // mSelectedItemId = BookContract.BookItems.getItemId(Uri.parse(URI));
         getLoaderManager().initLoader(1, null, this);
 
-
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return BookLoader.newInstanceForItemId(this, mFirstID);
+     //   return BookLoader.newInstanceForItemId(this, mFirstID);
+        return BookLoader.newAllArticlesInstance(this);
+
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursor=data;
-        Toast.makeText(this,mCursor.getString(BookLoader.Query.TITLE),Toast.LENGTH_LONG).show();
-       // getString(BookLoader.Query.TITLE
+        mCursor.moveToPosition(mFirstID);
+        mCursor.getString(BookLoader.Query.TITLE);
+        mCursor.getString(BookLoader.Query.PHOTO_URL);
+        mCursor.getString(BookLoader.Query.DESCRIPTION);
+        Toast.makeText(this,mCursor.getString(BookLoader.Query.TITLE),Toast.LENGTH_SHORT).show();
 
 
     }
@@ -60,6 +65,7 @@ public class DetailActivity extends AppCompatActivity implements
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        mCursor = null;
 
     }
 }
