@@ -11,6 +11,11 @@
     <dimen name="largesize">64dp</dimen>
     <dimen name="md_keylines">16dp</dimen>
     <dimen name="widget_header_padding">8dp</dimen>
+    <dimen name="AppBarLayout_hight">256dp</dimen>
+    <dimen name="expandedTitleMarginStart_size">48dp</dimen>
+    <dimen name="default_elevetion">6dp</dimen>
+
+
 
     <!--
 Refer to App Widget Documentation for margin information

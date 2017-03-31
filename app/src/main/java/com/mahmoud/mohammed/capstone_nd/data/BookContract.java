@@ -38,9 +38,11 @@ public static class BookItems implements BookColumns{
     }
 
     /** Read item ID item detail URI. */
+    /*
     public static long getItemId(Uri itemUri) {
         return Long.parseLong(itemUri.getPathSegments().get(1));
     }
+    */
 
 }
 }
