@@ -8,16 +8,19 @@ import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.mahmoud.mohammed.capstone_nd.Helper;
 import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.data.BookContract;
 import com.mahmoud.mohammed.capstone_nd.data.BookLoader;
@@ -35,9 +38,8 @@ public class DetailActivity extends AppCompatActivity implements
     ImageView mImageView;
     CollapsingToolbarLayout mCollapsingToolbar;
     TextView mDescription;
-
-
-    //  private long mStartId;
+    FloatingActionButton fab;
+    Book book;
 
 
     @Override
@@ -50,8 +52,9 @@ public class DetailActivity extends AppCompatActivity implements
         // mSelectedItemId = BookContract.BookItems.getItemId(Uri.parse(URI));
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         mImageView = (ImageView) findViewById(R.id.im_view);
-        mDescription=(TextView)findViewById(R.id.tv_description);
+        mDescription = (TextView) findViewById(R.id.tv_description);
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbartest);
+        fab = (FloatingActionButton) findViewById(R.id.favor);
         getLoaderManager().initLoader(1, null, this);
         setSupportActionBar(mToolbar);
     }
@@ -74,7 +77,13 @@ public class DetailActivity extends AppCompatActivity implements
         String title = mCursor.getString(BookLoader.Query.TITLE);
         String img_url = mCursor.getString(BookLoader.Query.PHOTO_URL);
         String desc = mCursor.getString(BookLoader.Query.DESCRIPTION);
+        final String id = mCursor.getString(BookLoader.Query._ID);
+        if (Helper.ifExist(DetailActivity.this, id)) {
+            fab.setImageResource(R.drawable.ic_like);
+        } else {
+            fab.setImageResource(R.drawable.ic_like_outline);
 
+        }
         mCursor.getString(BookLoader.Query.DESCRIPTION);
         mCollapsingToolbar.setTitle(title);
         mDescription.setText(desc);
@@ -83,6 +92,36 @@ public class DetailActivity extends AppCompatActivity implements
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(mImageView);
+        book = new Book();
+        book.setImageUrl(img_url);
+        book.setDescription(desc);
+        book.setId(id);
+        book.setTitle(title);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check if exist in database or not
+                //if exist
+                if (Helper.ifExist(DetailActivity.this, id)) {
+                    //remove it from sharedpref
+                    Helper.removeFromFavorite(DetailActivity.this, id);
+                    fab.setImageResource(R.drawable.ic_like_outline);
+                    Toast.makeText(DetailActivity.this,"removed from favorites",Toast.LENGTH_SHORT).show();
+
+
+                } else {
+                    //add it in sharedpref
+                    fab.setImageResource(R.drawable.ic_like);
+
+                    Helper.addToFavorite(DetailActivity.this, id);
+                    Toast.makeText(DetailActivity.this,"added to favorites",Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            }
+        });
+
         Toast.makeText(this, mCursor.getString(BookLoader.Query.TITLE), Toast.LENGTH_SHORT).show();
 
     }
