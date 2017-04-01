@@ -26,7 +26,6 @@ import com.mahmoud.mohammed.capstone_nd.data.BookContract;
 import com.mahmoud.mohammed.capstone_nd.data.BookLoader;
 import com.mahmoud.mohammed.capstone_nd.model.Book;
 
-import static com.mahmoud.mohammed.capstone_nd.ui.MainActivity.UNIQUE_ID;
 
 public class DetailActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {

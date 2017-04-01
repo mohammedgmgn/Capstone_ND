@@ -15,11 +15,11 @@ public class BookLoader extends CursorLoader {
     }
 
     //for specific item
-    /*
+
     public static BookLoader newInstanceForItemId(Context context, long itemId) {
         BookLoader loader=new BookLoader(context, BookContract.BookItems.buildItemUri(itemId));
         return loader ;
-    }*/
+    }
 
     private BookLoader(Context context, Uri uri) {
         super(context, uri, Query.PROJECTION, null, null, BookContract.BookItems.DEFAULT_SORT);

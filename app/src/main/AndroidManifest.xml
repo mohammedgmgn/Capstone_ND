@@ -28,8 +28,6 @@
                 android:value=".ui.MainActivity" />
         </activity>
 
-
-
         <service
             android:name=".data.UpdaterService"
             android:exported="true" />
@@ -54,22 +52,22 @@
             android:enabled="true"
             android:exported="true" />
 
-
         <receiver android:name=".widget.CollectionWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.ACTION_WIDGET_UPDATED"/>
-
+                <action android:name="android.appwidget.action.ACTION_WIDGET_UPDATED" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/collection_widget_info" />
         </receiver>
-        <service android:name=".widget.WidgetListService"
+
+        <service
+            android:name=".widget.WidgetListService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-
+        <activity android:name=".ui.Search"></activity>
     </application>
 
 </manifest>

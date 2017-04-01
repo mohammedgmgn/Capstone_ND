@@ -8,13 +8,20 @@ import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +64,10 @@ public class MainActivity extends AppCompatActivity implements
     MyAdapter adapter;
     private boolean mIsRefreshing = false;
     TextView mNoData;
-    final static int UNIQUE_ID=0;
+    final static int UNIQUE_ID0 = 0;
+    final static int UNIQUE_ID1 = 1;
+
+    FloatingActionButton mFloatingActionButton;
     private final String[] BOOK_COLUMNS = {
             BookContract.BookItems._ID,
             BookContract.BookItems.SERVER_ID,
@@ -66,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements
             BookContract.BookItems.PHOTO_URL,
 
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +90,26 @@ public class MainActivity extends AppCompatActivity implements
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_viewt);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab_help);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+startActivity(new Intent(MainActivity.this,Search.class));
+            }
+        });
+
+
         setSupportActionBar(toolbar);
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        getLoaderManager().initLoader(UNIQUE_ID, null, this);
+
+
+
+
+                getLoaderManager().initLoader(UNIQUE_ID0, null, this);
         if (savedInstanceState == null) {
             refresh();
         }
@@ -158,4 +183,29 @@ public class MainActivity extends AppCompatActivity implements
         recyclerView.setAdapter(null);
 
     }
+    /*
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Helper.getAllFavIds(this);
+        switch (item.getItemId()) {
+            case R.id.favo:
+                Cursor data = getContentResolver().query(BookContract.BookItems.buildDirUri(), BOOK_COLUMNS, null, null, null);
+              data.moveToPosition(1);
+
+                return true;
+            case R.id.all:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }*/
+
 }

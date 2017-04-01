@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.mahmoud.mohammed.capstone_nd.Helper;
 import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.data.BookContract;
 import com.mahmoud.mohammed.capstone_nd.data.BookLoader;
@@ -27,6 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     private Cursor mCursor;
     Context ctx;
     RecyclerViewClickListener itemListener;
+    boolean check=false;
 
     public MyAdapter() {
     }
@@ -64,6 +66,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     public void onBindViewHolder(Myholder holder, int position) {
 
         mCursor.moveToPosition(position);
+        String id=mCursor.getString(BookLoader.Query._ID);
         String title = mCursor.getString(BookLoader.Query.TITLE);
         String desc = mCursor.getString(BookLoader.Query.DESCRIPTION);
         holder.booktitle.setText(title);
@@ -83,8 +86,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
 
     class Myholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView booktitle, bookrate, bookdesc;
-        ImageView poster;
+        ImageView poster,favorite;
         LinearLayout linearLayout;
+
 
         public Myholder(View itemView) {
             super(itemView);
