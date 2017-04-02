@@ -24,10 +24,10 @@ public class Helper {
         return cm.getActiveNetworkInfo() != null;
     }
 
-    public static void addToFavorite(Context context, String  BookId) {
+    public static void addToFavorite(Context context, String BookId) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getPackageName() + SharedPreferencesFileName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(BookId,BookId);
+        editor.putString(BookId, BookId);
         editor.apply();
     }
 

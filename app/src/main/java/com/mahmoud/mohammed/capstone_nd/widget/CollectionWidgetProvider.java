@@ -21,7 +21,7 @@ public class CollectionWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for(int appWidgetId : appWidgetIds){
+        for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
@@ -32,10 +32,10 @@ public class CollectionWidgetProvider extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.collection_widget);
         views.setTextViewText(R.id.app_widget_text, widgetText);
         views.setTextColor(R.id.app_widget_text, Color.CYAN);
-        views.setRemoteAdapter(R.id.widget_list,new Intent(context,WidgetListService.class));
-        Intent launchIntent=new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent= PendingIntent.getActivity(context,0,launchIntent,0);
-        views.setOnClickPendingIntent(R.id.widget,pendingIntent);
+        views.setRemoteAdapter(R.id.widget_list, new Intent(context, WidgetListService.class));
+        Intent launchIntent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
+        views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
 
@@ -50,10 +50,11 @@ public class CollectionWidgetProvider extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if(UpdaterService.ACTION_WIDGET_UPDATED.equals(intent.getAction())) {
+        if (UpdaterService.ACTION_WIDGET_UPDATED.equals(intent.getAction())) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(new ComponentName(context, WidgetService.class)), R.id.widget_list);
 
-        }    }
+        }
+    }
 }
 

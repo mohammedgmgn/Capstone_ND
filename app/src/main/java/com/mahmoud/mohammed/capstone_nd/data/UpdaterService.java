@@ -5,24 +5,16 @@ import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.OperationApplicationException;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.RemoteException;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mahmoud.mohammed.capstone_nd.Helper;
-import com.mahmoud.mohammed.capstone_nd.adapter.MyAdapter;
-import com.mahmoud.mohammed.capstone_nd.model.Book;
 import com.mahmoud.mohammed.capstone_nd.remote.ApplicationController;
 import com.mahmoud.mohammed.capstone_nd.remote.config;
-import com.mahmoud.mohammed.capstone_nd.ui.DetailActivity;
-import com.mahmoud.mohammed.capstone_nd.ui.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,11 +38,11 @@ public class UpdaterService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-       // ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        // ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         //NetworkInfo info = cm.getActiveNetworkInfo();
 
         if (!Helper.isNetworkConnected(getApplicationContext())) {
-           // Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             return;
         }
         sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, true));
@@ -96,7 +88,7 @@ public class UpdaterService extends IntentService {
             }
         });
         ApplicationController.getInstance().addToRequestQueue(request);
-       // sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
+        // sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
 
 
     }

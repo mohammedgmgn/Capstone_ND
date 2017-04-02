@@ -25,7 +25,7 @@ public class BooksDatabase extends SQLiteOpenHelper {
                 + BookContract.BookColumns.TITLE + " TEXT NOT NULL,"
                 + BookContract.BookColumns.DESCRIPTION + " TEXT NOT NULL,"
                 + BookContract.BookColumns.PHOTO_URL + " TEXT NOT NULL"
-                + ")" );
+                + ")");
     }
 
     @Override

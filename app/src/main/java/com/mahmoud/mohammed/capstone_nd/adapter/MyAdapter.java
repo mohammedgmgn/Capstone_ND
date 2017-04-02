@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +14,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.mahmoud.mohammed.capstone_nd.Helper;
 import com.mahmoud.mohammed.capstone_nd.R;
-import com.mahmoud.mohammed.capstone_nd.data.BookContract;
 import com.mahmoud.mohammed.capstone_nd.data.BookLoader;
-import com.mahmoud.mohammed.capstone_nd.model.Book;
 import com.mahmoud.mohammed.capstone_nd.ui.DetailActivity;
-
-import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     private Cursor mCursor;
     Context ctx;
     RecyclerViewClickListener itemListener;
-    boolean check=false;
+    boolean check = false;
 
     public MyAdapter() {
     }
@@ -52,10 +46,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(ctx,DetailActivity.class);
-                i.putExtra("postion",holder.getAdapterPosition());
+                Intent i = new Intent(ctx, DetailActivity.class);
+                i.putExtra("postion", holder.getAdapterPosition());
                 ctx.startActivity(i);
-               // ctx.startActivity(new Intent(Intent.ACTION_VIEW, BookContract.BookItems.buildItemUri(getItemId(holder.getAdapterPosition()))));
+                // ctx.startActivity(new Intent(Intent.ACTION_VIEW, BookContract.BookItems.buildItemUri(getItemId(holder.getAdapterPosition()))));
             }
         });
 
@@ -66,7 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
     public void onBindViewHolder(Myholder holder, int position) {
 
         mCursor.moveToPosition(position);
-        String id=mCursor.getString(BookLoader.Query._ID);
+        String id = mCursor.getString(BookLoader.Query._ID);
         String title = mCursor.getString(BookLoader.Query.TITLE);
         String desc = mCursor.getString(BookLoader.Query.DESCRIPTION);
         holder.booktitle.setText(title);
@@ -86,7 +80,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
 
     class Myholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView booktitle, bookrate, bookdesc;
-        ImageView poster,favorite;
+        ImageView poster, favorite;
         LinearLayout linearLayout;
 
 

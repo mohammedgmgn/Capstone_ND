@@ -21,13 +21,14 @@ public class Search extends AppCompatActivity {
     Toolbar mToolbar;
     ArrayList<String> search_filter;
     final static int UNIQUE_ID0 = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        mToolbar=(Toolbar)findViewById(R.id.toolbar_search);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_search);
         setSupportActionBar(mToolbar);
-        search_filter=new ArrayList<>();
+        search_filter = new ArrayList<>();
         //getLoaderManager().initLoader(UNIQUE_ID0, null, this);
 
     }

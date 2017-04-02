@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'mohammed'
+            keyPassword 'gmgn'
+            storeFile file('$rootdir/keystore.jks')
+            storePassword 'gmgn'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -15,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     buildTypes.each {
@@ -22,21 +31,17 @@ android {
             it.buildConfigField 'String', 'THE_BOOK_API_KEY', "\"AIzaSyDodQIitDnWcldanQOYYFx-WZvGm1mbgYM\""
         }
     }
-
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.mcxiaoke.volley:library:1.0.19'
     // this line must be included to integrate with Firebase
     // this line must be included to use FCM
-
-
     compile 'com.google.code.gson:gson:2.7'
-
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.github.bumptech.glide:glide:3.7.0'

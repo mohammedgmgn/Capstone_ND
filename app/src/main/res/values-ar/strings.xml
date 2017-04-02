@@ -3,4 +3,8 @@
     <string name="app_name">ReadShow</string>
     <string name="all">الكل</string>
     <string name="magazines">مجلات</string>
+    <string name="fab_content_description">للبحث عن كتاب معين</string>
+    <string name="fab_favor_content_description">لاضافة كتاب لقائمة المفضلات </string>
+
+
 </resources>

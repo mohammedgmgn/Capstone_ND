@@ -3,25 +3,22 @@ package com.mahmoud.mohammed.capstone_nd.widget;
 import android.app.IntentService;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import com.mahmoud.mohammed.capstone_nd.R;
 import com.mahmoud.mohammed.capstone_nd.data.BookContract;
-import com.mahmoud.mohammed.capstone_nd.data.UpdaterService;
 import com.mahmoud.mohammed.capstone_nd.ui.MainActivity;
 
 /**
  * Created by siko on 3/25/2017.
  */
 //the adapter for list view :)
-public class WidgetService extends IntentService{
+public class WidgetService extends IntentService {
+    private static final String name = "WidgetService";
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -42,11 +39,9 @@ public class WidgetService extends IntentService{
             BookContract.BookItems.PHOTO_URL,
 
     };
-
-    public WidgetService(String name) {
+    public WidgetService() {
         super(name);
     }
-
     @Override
     protected void onHandleIntent(Intent intent) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
@@ -57,7 +52,7 @@ public class WidgetService extends IntentService{
 
         Cursor data = getContentResolver().query(bookUri, BOOK_COLUMNS, null, null, null);
 
-        if(data == null){
+        if (data == null) {
             return;
         }
 
@@ -74,9 +69,9 @@ public class WidgetService extends IntentService{
             String titletext = data.getString(POSITION_TITLE);
             views.setTextViewText(R.id.app_widget_text, titletext);
 
-            Intent launchIntent=new Intent(this, MainActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this,0,launchIntent,0);
-            views.setOnClickPendingIntent(R.id.widget,pendingIntent);
+            Intent launchIntent = new Intent(this, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0);
+            views.setOnClickPendingIntent(R.id.widget, pendingIntent);
             // Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }

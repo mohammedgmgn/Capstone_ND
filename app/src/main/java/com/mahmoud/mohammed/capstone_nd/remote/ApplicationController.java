@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
+
 /**
  * Created by gmgn on 12/13/2016.
  */
@@ -21,25 +22,30 @@ public class ApplicationController extends Application {
         super.onCreate();
         sInstance = this;
     }
+
     public static synchronized ApplicationController getInstance() {
         return sInstance;
     }
+
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return mRequestQueue;
     }
+
     public <T> void addToRequestQueue(Request<T> req, String tag) {
         req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
         VolleyLog.e("Adding request to queue: %s", req.getUrl());
         getRequestQueue().add(req);
     }
+
     public <T> void addToRequestQueue(Request<T> req) {
         req.setTag(TAG);
 
         getRequestQueue().add(req);
     }
+
     public void cancelPendingRequests(Object tag) {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);

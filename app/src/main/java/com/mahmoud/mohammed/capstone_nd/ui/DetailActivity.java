@@ -1,18 +1,13 @@
 package com.mahmoud.mohammed.capstone_nd.ui;
 
 import android.app.LoaderManager;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.net.Uri;
-import android.provider.Settings;
+import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mahmoud.mohammed.capstone_nd.Helper;
 import com.mahmoud.mohammed.capstone_nd.R;
-import com.mahmoud.mohammed.capstone_nd.data.BookContract;
 import com.mahmoud.mohammed.capstone_nd.data.BookLoader;
 import com.mahmoud.mohammed.capstone_nd.model.Book;
 
@@ -46,9 +40,6 @@ public class DetailActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         mFirstID = getIntent().getIntExtra("postion", ID_DEFAULT_VALUE);
-        //URI=getIntent().getStringExtra("uri");
-        //  Toast.makeText(this,mFirstID+"",Toast.LENGTH_SHORT).show();
-        // mSelectedItemId = BookContract.BookItems.getItemId(Uri.parse(URI));
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         mImageView = (ImageView) findViewById(R.id.im_view);
         mDescription = (TextView) findViewById(R.id.tv_description);
@@ -105,7 +96,7 @@ public class DetailActivity extends AppCompatActivity implements
                     //remove it from sharedpref
                     Helper.removeFromFavorite(DetailActivity.this, id);
                     fab.setImageResource(R.drawable.ic_like_outline);
-                    Toast.makeText(DetailActivity.this,"removed from favorites",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity.this, getString(R.string.delete_item_message), Toast.LENGTH_SHORT).show();
 
 
                 } else {
@@ -113,7 +104,7 @@ public class DetailActivity extends AppCompatActivity implements
                     fab.setImageResource(R.drawable.ic_like);
 
                     Helper.addToFavorite(DetailActivity.this, id);
-                    Toast.makeText(DetailActivity.this,"added to favorites",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity.this, getString(R.string.add_item_message), Toast.LENGTH_SHORT).show();
 
                 }
 

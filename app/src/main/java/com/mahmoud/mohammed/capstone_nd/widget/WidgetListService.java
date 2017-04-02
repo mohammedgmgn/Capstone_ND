@@ -3,7 +3,6 @@ package com.mahmoud.mohammed.capstone_nd.widget;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;

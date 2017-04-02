@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-startActivity(new Intent(MainActivity.this,Search.class));
+                startActivity(new Intent(MainActivity.this, Search.class));
             }
         });
 
@@ -107,9 +107,7 @@ startActivity(new Intent(MainActivity.this,Search.class));
         mAdView.loadAd(adRequest);
 
 
-
-
-                getLoaderManager().initLoader(UNIQUE_ID0, null, this);
+        getLoaderManager().initLoader(UNIQUE_ID0, null, this);
         if (savedInstanceState == null) {
             refresh();
         }
