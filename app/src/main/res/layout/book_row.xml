@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
-                android:text="Bajrang Bhaijaan"
+                android:text="@string/book_name"
                 android:textColor="#2d2d2d"
                 android:textSize="22dp"
                 android:textStyle="bold" />

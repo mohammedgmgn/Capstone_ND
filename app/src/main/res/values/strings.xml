@@ -16,6 +16,8 @@
     <string name="add_item_message">added to favorites</string>
     <string name="fab_content_description">For serching about specific book</string>
     <string name="fab_favor_content_description">For add book to favorites</string>
+    <string name="Error_message">Error message</string>
+    <string name="book_name">Bajrang Bhaijaan</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
