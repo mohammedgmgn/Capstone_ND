@@ -4,11 +4,24 @@ android {
     signingConfigs {
         config {
             keyAlias 'mohammed'
-            keyPassword 'gmgn'
-            storeFile file('$rootdir/keystore.jks')
-            storePassword 'gmgn'
+            keyPassword '0119742811'
+            storeFile file("$rootDir/keystore.jks")
+            storePassword '0119742811'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    dexOptions {
+        incremental = true;
+        preDexLibraries = false
+        javaMaxHeapSize "4g" // 2g should be also OK
+    }
+
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
